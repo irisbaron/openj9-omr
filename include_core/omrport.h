@@ -1,3 +1,4 @@
+
 /*******************************************************************************
  * Copyright (c) 1991, 2018 IBM Corp. and others
  *
@@ -536,8 +537,17 @@ typedef struct J9SysinfoCPUTime {
 	int64_t timestamp; /* time in nanoseconds from a fixed but arbitrary point in time */
 	int64_t cpuTime; /* cumulative CPU utilization (sum of system and user time in nanoseconds) of all CPUs on the system. */
 	int32_t numberOfCpus; /* number of CPUs as reported by the operating system */
-  	int32_t cpuLoad; /* CPU utilization % of all processors on the system including gcp and ziips (between 0 and 100) */
+
 } J9SysinfoCPUTime;
+
+/* Used by omrsysinfo_get_CPU_load() */
+typedef struct OMRSysinfoCPULoad {
+        double cpuLoad; /* CPU utilization % of all processors on the system (between 0 and 1) */
+} OMRSysinfoCPUTime;
+
+J9SysinfoCPUTime latestSystemCpuTime = NULL;
+J9SysinfoCPUTime interimSystemCpuTime = NULL;
+J9SysinfoCPUTime oldestSystemCpuTime = NULL;
 
 /* Key memory categories are copied here for DDR access */
 /* Special memory category for memory allocated for unknown categories */
@@ -1163,6 +1173,8 @@ typedef struct OMRPortLibrary {
 	intptr_t (*sysinfo_get_load_average)(struct OMRPortLibrary *portLibrary, struct J9PortSysInfoLoadData *loadAverageData) ;
 	/** see @ref omrsysinfo.c::omrsysinfo_get_CPU_utilization "omrsysinfo_get_CPU_utilization"*/
 	intptr_t (*sysinfo_get_CPU_utilization)(struct OMRPortLibrary *portLibrary, struct J9SysinfoCPUTime *cpuTime) ;
+    /** see @ref omrsysinfo.c::omrsysinfo_get_CPU_load "omrsysinfo_get_CPU_load"*/
+    intptr_t (*sysinfo_get_CPU_load)(struct OMRPortLibrary *portLibrary, struct OMRSysinfoCPULoad *cpuLoad) ;
 	/** see @ref omrsysinfo.c::omrsysinfo_limit_iterator_init "omrsysinfo_limit_iterator_init"*/
 	int32_t (*sysinfo_limit_iterator_init)(struct OMRPortLibrary *portLibrary, J9SysinfoLimitIteratorState *state) ;
 	/** see @ref omrsysinfo.c::omrsysinfo_limit_iterator_hasNext "omrsysinfo_limit_iterator_hasNext"*/

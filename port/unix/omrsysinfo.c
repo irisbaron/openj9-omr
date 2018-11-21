@@ -2456,7 +2456,6 @@ omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9Sysi
 	 */
 	uint64_t preTimestamp = portLibrary->time_nano_time(portLibrary); /* ticks */
 	uint64_t postTimestamp; /* ticks */
-	cpuTime->cpuLoad = -1; /* initialize cpuLoad */ 
 
 #if defined(LINUX)
 	intptr_t bytesRead = -1;
@@ -2540,12 +2539,12 @@ omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9Sysi
 	cpuTime->cpuTime = (stats.user + stats.sys) * NS_PER_CPU_TICK;
 	status = 0;
 	
-#elif defined(J9ZOS390) /* ZOS */
-	cctptr = CVTBASE->cvtrmct->rmctcct;
-	cpuTime->numberOfCpus = portLibrary->sysinfo_get_number_CPUs_by_type(portLibrary, OMRPORT_CPU_ONLINE);
-	cpuTime->cpuLoad = cctptr->ccvutilp;
-	cpuTime->cpuTime = -1;
-	status = 0;
+//#elif defined(J9ZOS390) /* ZOS */
+//	cctptr = CVTBASE->cvtrmct->rmctcct;
+//	cpuTime->numberOfCpus = portLibrary->sysinfo_get_number_CPUs_by_type(portLibrary, OMRPORT_CPU_ONLINE);
+//	cpuTime->cpuLoad = cctptr->ccvutilp;
+//	cpuTime->cpuTime = -1;
+//	status = 0;
 #endif
 	postTimestamp = portLibrary->time_nano_time(portLibrary);
 
