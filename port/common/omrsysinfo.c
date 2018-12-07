@@ -540,7 +540,7 @@ omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9Sysi
  *
  */
 intptr_t
-omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  double *systemCpuLoad)
+omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad)
 {
     intptr_t ret;
     
@@ -594,7 +594,7 @@ omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  double *systemCpuLo
 }
 
 int32_t
-omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, double *cpuLoadVal)
+omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad)
 {
     
     int32_t rc = 0;
@@ -605,7 +605,7 @@ omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *start
         return OMRPORT_ERROR_SYSINFO_OPFAILED; /* the stats are invalid */ 
     }
     /* ensure the load can't go over 1.0 */
-    *cpuLoadVal = OMR_MIN(cpuDelta / (endRecord.getNumberOfCpus() * timestampDelta),
+    cpuLoad.cpuLoad = OMR_MIN(cpuDelta / (endRecord.getNumberOfCpus() * timestampDelta),
     return rc;
 }
 
