@@ -545,9 +545,6 @@ typedef struct OMRSysinfoCPULoad {
         double cpuLoad; /* CPU utilization % of all processors on the system (between 0 and 1) */
 } OMRSysinfoCPUTime;
 
-J9SysinfoCPUTime latestSystemCpuTime = NULL;
-J9SysinfoCPUTime interimSystemCpuTime = NULL;
-J9SysinfoCPUTime oldestSystemCpuTime = NULL;
 
 /* Key memory categories are copied here for DDR access */
 /* Special memory category for memory allocated for unknown categories */

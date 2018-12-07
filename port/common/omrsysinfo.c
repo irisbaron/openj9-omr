@@ -543,17 +543,17 @@ intptr_t
 omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad)
 {
     intptr_t ret;
-    
+    J9SysinfoCPUTime latestSystemCpuTime;
 	ret = omrsysinfo_get_CPU_utilization(portLibrary,&latestSystemCpuTime);
 	if (ret < 0) {
         //propogate the error
         /* not supported on this platform or user does not have sufficient rights */
         return ret;
 	}
-
+    
 	if (NULL == oldestSystemCpuTime) { /* first call to this method */
-        memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysInfoSystemCpuTime));
-        memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysInfoSystemCpuTime));
+        memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
+        memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
         return OMRPORT_ERROR_OPFAILED;
 	}
 
@@ -564,8 +564,8 @@ omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCP
 
 		if (ret == 0) //systemCpuLoad >= 0.0) { /* no errors detected in the statistics */
             /* discard the oldestSystemCpuTime, replace it with interimSystemCpuTime and save newestSystemCpuTime as the new interimSystemCpuTime. */
-            memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysInfoSystemCpuTime));
-            memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysInfoSystemCpuTime));
+            memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
+            memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
 		} else {
             /*
              * either the latest time or the interim time are bogus.

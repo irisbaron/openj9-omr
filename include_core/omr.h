@@ -89,6 +89,8 @@ typedef struct OMR_Runtime {
 	struct OMR_VM *_rootVM;
 	struct OMR_RuntimeConfiguration _configuration;
 	uintptr_t _vmCount;
+    J9SysinfoCPUTime oldestSystemCpuTime;            /* the oldest GetSystemCpuLoad() call record */
+    J9SysinfoCPUTime interimSystemCpuTime;             /* the 2nd oldest GetSystemCpuLoad() call record */
 } OMR_Runtime;
 
 typedef struct OMR_VMConfiguration {
