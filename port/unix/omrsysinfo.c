@@ -2561,6 +2561,30 @@ omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9Sysi
 #endif
 }
 
+
+
+
+
+/**
+ * Obtain the cumulative CPU load (utilization as percentage) of all CPUs on the system.
+ * The cpuLoad value represent system utilization in percentage.
+ *
+ * @param[in] OMRPortLibrary portLibrary The port library.
+ * @param[out] OMRSysinfoCPULoad cpuLoad  struct to receive the CPU load
+ *
+ * @return 0 on success, negative portable error code on failure.
+ *
+ */
+intptr_t
+omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad)
+{
+    
+    
+    return omrsysinfo_get_CPU_load_helper(portLibrary, systemCpuLoad);
+    
+    
+}
+
 int32_t
 omrsysinfo_limit_iterator_init(struct OMRPortLibrary *portLibrary, J9SysinfoLimitIteratorState *state)
 {

@@ -542,72 +542,10 @@ omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9Sysi
 intptr_t
 omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad)
 {
-    intptr_t ret;
-    J9SysinfoCPUTime latestSystemCpuTime;
-	ret = omrsysinfo_get_CPU_utilization(portLibrary,&latestSystemCpuTime);
-	if (ret < 0) {
-        //propogate the error
-        /* not supported on this platform or user does not have sufficient rights */
-        return ret;
-	}
-    
-	if (NULL == oldestSystemCpuTime) { /* first call to this method */
-        memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
-        memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
-        return OMRPORT_ERROR_OPFAILED;
-	}
-
-	/* calculate using the most recent value in the history */
-	if ((latestSystemCpuTime.timestamp - interimSystemCpuTime.timestamp) >= MINIMUM_INTERVAL) {
-		
-		ret = calculateCpuLoad(&latestSystemCpuTime, &interimSystemCpuTime, systemCpuLoad);
-
-		if (ret == 0) //systemCpuLoad >= 0.0) { /* no errors detected in the statistics */
-            /* discard the oldestSystemCpuTime, replace it with interimSystemCpuTime and save newestSystemCpuTime as the new interimSystemCpuTime. */
-            memcpy(&oldestSysteCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
-            memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCpuTime));
-		} else {
-            /*
-             * either the latest time or the interim time are bogus.
-             * Discard the interim value and replace with the latest value.
-             */
-                memcpy(&interimSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCPUTime));
-      
-            /* attempt to recompute using the oldestSystemCpuTime. */
-            
-            if ((latestSystemCpuTime.timestamp - oldestSystemCpuTime.timestamp) >= MINIMUM_INTERVAL) {
-	
-                ret = calculateCpuLoad(latestSystemCpuTime, oldestSystemCpuTime, systemCpuLoad);
-                if (ret != 0) {
-                    /* the stats look bogus.  Discard them */
-                    /* discard oldSystemCpuLoad and replace it with newestSystemCpuTime. */
-                    memcpy(&oldestSystemCpuTime, &latestSystemCpuTime, sizeof(J9SysinfoCPUTime));
-
-                }
-         
-            }
-        }
-
-	return ret;
-    
+    return OMRPORT_ERROR_SYSINFO_NOT_SUPPORTED;
 
 }
 
-int32_t
-omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad)
-{
-    
-    int32_t rc = 0;
-    double timestampDelta = endRecord.getTimestamp() - startRecord.getTimestamp();
-
-    double cpuDelta = endRecord.getCpuTime() - startRecord.getCpuTime();
-    if ((timestampDelta <= 0) || (cpuDelta < 0)) {
-        return OMRPORT_ERROR_SYSINFO_OPFAILED; /* the stats are invalid */ 
-    }
-    /* ensure the load can't go over 1.0 */
-    cpuLoad.cpuLoad = OMR_MIN(cpuDelta / (endRecord.getNumberOfCpus() * timestampDelta),
-    return rc;
-}
 
 /**
  * Initializes the iterator state to be used by @ref omrsysinfo_limit_iterator_next()
