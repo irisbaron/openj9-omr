@@ -1827,6 +1827,7 @@ extern J9_CFUNC int32_t omrport_getVersion(struct OMRPortLibrary *portLibrary);
 #define omrsysinfo_get_groupname(param1,param2) privateOmrPortLibrary->sysinfo_get_groupname(privateOmrPortLibrary, (param1), (param2))
 #define omrsysinfo_get_load_average(param1) privateOmrPortLibrary->sysinfo_get_load_average(privateOmrPortLibrary, (param1))
 #define omrsysinfo_get_CPU_utilization(param1) privateOmrPortLibrary->sysinfo_get_CPU_utilization(privateOmrPortLibrary, (param1))
+#define omrsysinfo_get_CPU_load(param1) privateOmrPortLibrary->sysinfo_get_CPU_load(privateOmrPortLibrary, (param1))
 #define omrsysinfo_limit_iterator_init(param1) privateOmrPortLibrary->sysinfo_limit_iterator_init(privateOmrPortLibrary, (param1))
 #define omrsysinfo_limit_iterator_hasNext(param1) privateOmrPortLibrary->sysinfo_limit_iterator_hasNext(privateOmrPortLibrary, (param1))
 #define omrsysinfo_limit_iterator_next(param1,param2) privateOmrPortLibrary->sysinfo_limit_iterator_next(privateOmrPortLibrary, (param1), (param2))
