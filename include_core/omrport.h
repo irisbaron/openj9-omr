@@ -1166,8 +1166,8 @@ typedef struct OMRPortLibrary {
 	intptr_t (*sysinfo_get_username)(struct OMRPortLibrary *portLibrary, char *buffer, uintptr_t length) ;
 	/** see @ref omrsysinfo.c::omrsysinfo_get_groupname "omrsysinfo_get_groupname"*/
 	intptr_t (*sysinfo_get_groupname)(struct OMRPortLibrary *portLibrary, char *buffer, uintptr_t length) ;
-	/** see @ref omrsysinfo.c::omrsysinfo_get_load_average "omrsysinfo_get_load_average"*/
-	intptr_t (*sysinfo_get_load_average)(struct OMRPortLibrary *portLibrary, struct J9PortSysInfoLoadData *loadAverageData) ;
+    /** see @ref omrsysinfo.c::omrsysinfo_get_load_average "omrsysinfo_get_load_average"*/
+    intptr_t (*sysinfo_get_load_average)(struct OMRPortLibrary *portLibrary, struct J9PortSysInfoLoadData *loadAverageData) ;
 	/** see @ref omrsysinfo.c::omrsysinfo_get_CPU_utilization "omrsysinfo_get_CPU_utilization"*/
 	intptr_t (*sysinfo_get_CPU_utilization)(struct OMRPortLibrary *portLibrary, struct J9SysinfoCPUTime *cpuTime) ;
     /** see @ref omrsysinfo.c::omrsysinfo_get_CPU_load "omrsysinfo_get_CPU_load"*/
