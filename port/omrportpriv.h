@@ -503,6 +503,8 @@ extern J9_CFUNC int32_t
 omrsysinfo_env_iterator_next(struct OMRPortLibrary *portLibrary, J9SysinfoEnvIteratorState *state, J9SysinfoEnvElement *envElement);
 extern J9_CFUNC intptr_t
 omrsysinfo_get_CPU_utilization(struct OMRPortLibrary *portLibrary, struct J9SysinfoCPUTime *cpuTime);
+extern J9_CFUNC intptr_t
+omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary, struct OMRSysinfoCPULoad *cpuLoad);
 extern J9_CFUNC void
 omrsysinfo_set_number_user_specified_CPUs(struct OMRPortLibrary *portLibrary, uintptr_t number);
 extern J9_CFUNC intptr_t

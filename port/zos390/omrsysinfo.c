@@ -108,7 +108,7 @@ uintptr_t Get_Number_Of_CPUs();
 #endif    
 
 intptr_t
-omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary, struct omrsysinfo_get_CPU_load *cpuLoad)
+omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary, struct OMRSysinfoCPULoad *cpuLoad)
 {
 }
 
