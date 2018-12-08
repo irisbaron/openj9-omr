@@ -422,6 +422,10 @@ static int32_t retrieveAIXMemoryStats(struct OMRPortLibrary *portLibrary, struct
 static int32_t retrieveZOSMemoryStats(struct OMRPortLibrary *portLibrary, struct J9MemoryInfo *memInfo);
 #endif
 
+#if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
+static intptr_t omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+#endif
+
 #if defined(J9ZOS390)
 #define CVTBASE  (*(struct cvt * __ptr32 * __ptr32)16)
 	struct cvt {
@@ -2579,8 +2583,16 @@ intptr_t
 omrsysinfo_get_CPU_load(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad)
 {
     
-    
+#if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
     return omrsysinfo_get_CPU_load_helper(portLibrary, systemCpuLoad);
+#elif defined(J9ZOS390) /* ZOS */
+    cctptr = CVTBASE->cvtrmct->rmctcct;
+    cpuLoad.cpuLoad = (double)cctptr->ccvutilp/100;
+    return  0;
+#else /* (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX) || defined(J9ZOS390) */
+    /* Support on z/OS being temporarily removed to avoid wrong CPU stats being passed. */
+    return OMRPORT_ERROR_SYSINFO_NOT_SUPPORTED;
+#endif
     
     
 }
