@@ -546,6 +546,10 @@ omrsysinfo_cgroup_subsystem_iterator_hasNext(struct OMRPortLibrary *portLibrary,
 extern J9_CFUNC int32_t
 omrsysinfo_cgroup_subsystem_iterator_next(struct OMRPortLibrary *portLibrary, struct OMRCgroupMetricIteratorState *state, struct OMRCgroupMetricElement *metricElement, BOOLEAN *printUnits, uint64_t sizeRef);
 
+
+extern J9_CFUNC intptr_t
+omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+
 /* J9SourceJ9Signal*/
 extern J9_CFUNC int32_t
 omrsig_startup(struct OMRPortLibrary *portLibrary);

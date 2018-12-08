@@ -423,7 +423,7 @@ static int32_t retrieveZOSMemoryStats(struct OMRPortLibrary *portLibrary, struct
 #endif
 
 #if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
-static intptr_t omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+//IRIS static intptr_t omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
 #endif
 
 #if defined(J9ZOS390)
