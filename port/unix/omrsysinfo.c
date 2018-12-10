@@ -165,7 +165,7 @@
 #endif
 
 #if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
-#influde "omrsysinfo_cpuload.h"
+#include "omrsysinfo_cpuload.h"
 #endif
 
 #pragma linkage (GETNCPUS,OS)
