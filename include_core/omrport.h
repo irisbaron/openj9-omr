@@ -1428,7 +1428,12 @@ typedef struct OMRPortLibrary {
 	const char *(*nls_lookup_message)(struct OMRPortLibrary *portLibrary, uintptr_t flags, uint32_t module_name, uint32_t message_num, const char *default_string) ;
 	/** see @ref omrportcontrol.c::omrport_control "omrport_control"*/
 	int32_t (*port_control)(struct OMRPortLibrary *portLibrary, const char *key, uintptr_t value) ;
-	/** see @ref omrsignal.c::omrsig_startup "omrsig_startup"*/
+	
+    /** see @ref omrsysinfo_cpuload.c::omrsysinfo_get_CPU_load_helper "omrsysinfo_get_CPU_load_helper"*/
+    intptr_t (*omrsysinfo_get_CPU_load_helper)(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+    int32_t omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad);
+    
+    /** see @ref omrsignal.c::omrsig_startup "omrsig_startup"*/
 	int32_t (*sig_startup)(struct OMRPortLibrary *portLibrary) ;
 	/** see @ref omrsignal.c::omrsig_shutdown "omrsig_shutdown"*/
 	void (*sig_shutdown)(struct OMRPortLibrary *portLibrary) ;

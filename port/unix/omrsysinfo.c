@@ -164,6 +164,10 @@
 #define PATH_MAX 1024
 #endif
 
+#if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
+#influde "omrsysinfo_cpuload.h"
+#endif
+
 #pragma linkage (GETNCPUS,OS)
 #pragma map (Get_Number_Of_CPUs,"GETNCPUS")
 uintptr_t Get_Number_Of_CPUs();
@@ -423,7 +427,7 @@ static int32_t retrieveZOSMemoryStats(struct OMRPortLibrary *portLibrary, struct
 #endif
 
 #if (defined(LINUX) && !defined(OMRZTPF)) || defined(AIXPPC) || defined(OSX)
-static intptr_t omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+//IRIS static intptr_t omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
 #endif
 
 #if defined(J9ZOS390)

@@ -92,8 +92,7 @@ omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSy
 
 }
 
-int32_t
-omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad)
+
 {
     
     int32_t rc = 0;

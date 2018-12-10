@@ -549,6 +549,8 @@ omrsysinfo_cgroup_subsystem_iterator_next(struct OMRPortLibrary *portLibrary, st
 
 extern J9_CFUNC intptr_t
 omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
+extern J9_CFUNC int32_t
+omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad);
 
 /* J9SourceJ9Signal*/
 extern J9_CFUNC int32_t
