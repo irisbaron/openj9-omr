@@ -59,7 +59,7 @@ omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSy
 	/* calculate using the most recent value in the history */
 	if ((latestSystemCpuTime.timestamp - interimSystemCpuTime.timestamp) >= MINIMUM_INTERVAL) {
 		
-		ret = omrsusinfo_calculateCpuLoad(&latestSystemCpuTime, &interimSystemCpuTime, systemCpuLoad);
+		ret = omrsysinfo_calculateCpuLoad(&latestSystemCpuTime, &interimSystemCpuTime, systemCpuLoad);
 
 		if (ret == 0) //systemCpuLoad >= 0.0) { /* no errors detected in the statistics */
             /* discard the oldestSystemCpuTime, replace it with interimSystemCpuTime and save newestSystemCpuTime as the new interimSystemCpuTime. */
@@ -76,7 +76,7 @@ omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSy
             
             if ((latestSystemCpuTime.timestamp - oldestSystemCpuTime.timestamp) >= MINIMUM_INTERVAL) {
 	
-                ret = omrsusinfo_calculateCpuLoad(latestSystemCpuTime, oldestSystemCpuTime, systemCpuLoad);
+                ret = omrsysinfo_calculateCpuLoad(latestSystemCpuTime, oldestSystemCpuTime, systemCpuLoad);
                 if (ret != 0) {
                     /* the stats look bogus.  Discard them */
                     /* discard oldSystemCpuLoad and replace it with newestSystemCpuTime. */
@@ -93,6 +93,7 @@ omrsysinfo_get_CPU_load_helper(struct OMRPortLibrary *portLibrary,  struct OMRSy
 }
 
 
+int32_t omrsysinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad)
 {
     
     int32_t rc = 0;

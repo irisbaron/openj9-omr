@@ -1431,7 +1431,7 @@ typedef struct OMRPortLibrary {
 	
     /** see @ref omrsysinfo_cpuload.c::omrsysinfo_get_CPU_load_helper "omrsysinfo_get_CPU_load_helper"*/
     intptr_t (*omrsysinfo_get_CPU_load_helper)(struct OMRPortLibrary *portLibrary,  struct OMRSysinfoCPULoad *systemCpuLoad);
-    int32_t omrsusinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad);
+    int32_t omrsysinfo_calculateCpuLoad(J9SysinfoCPUTime *endRecord, J9SysinfoCPUTime *startRecord, struct OMRSysinfoCPULoad *cpuLoad);
     
     /** see @ref omrsignal.c::omrsig_startup "omrsig_startup"*/
 	int32_t (*sig_startup)(struct OMRPortLibrary *portLibrary) ;
