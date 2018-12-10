@@ -212,6 +212,8 @@ static OMRPortLibrary MasterPortLibraryTable = {
 	j9nls_vprintf, /* nls_vprintf */
 	j9nls_lookup_message, /* nls_lookup_message */
 	omrport_control, /* port_control */
+    omrsysinfo_get_CPU_load_helper, /* sysinfo */
+    omrsysinfo_calculateCpuLoad, /*sysinfo */
 	omrsig_startup, /* sig_startup*/
 	omrsig_shutdown, /* sig_shutdown */
 	omrsig_protect,  /* sig_protect */
