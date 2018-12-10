@@ -126,6 +126,7 @@ ifeq (1,$(OMR_ENV_DATA64))
   OBJECTS += omrmem32helpers
 endif
 
+OBJECTS += omrsysinfo_cpuload
 OBJECTS += omrheap
 OBJECTS += omrmem
 OBJECTS += omrmemtag
