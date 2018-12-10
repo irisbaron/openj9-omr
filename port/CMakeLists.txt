@@ -133,9 +133,11 @@ endif()
 
 if(OMR_ENV_DATA64)
 	list(APPEND OBJECTS omrmem32helpers.c)
+
 endif()
 
 list(APPEND OBJECTS
+	omrsysinfo_cpuload.c
 	omrheap.c
 	omrmem.c
 	omrmemtag.c
@@ -162,7 +164,6 @@ endif()
 list(APPEND OBJECTS
 	omrsl.c
 	omrstr.c
-	omrsysinfo_cpuload.c
 	omrsysinfo.c
 )
 
