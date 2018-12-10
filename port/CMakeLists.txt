@@ -162,6 +162,7 @@ endif()
 list(APPEND OBJECTS
 	omrsl.c
 	omrstr.c
+	omrsysinfo_cpuload.c
 	omrsysinfo.c
 )
 
